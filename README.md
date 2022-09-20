@@ -5,6 +5,7 @@ Tour Management System
 You are required to build an API for a tour management system for this assignment. In this system, you have to provide several endpoints to the client. The endpoints are:
 
 `ROOT ROUTE :`
+[https://tours-management.vercel.app/api/](https://tours-management.vercel.app/api/tours)
 
 - `GET /tours`
 
