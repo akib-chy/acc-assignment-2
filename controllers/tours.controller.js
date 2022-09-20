@@ -2,6 +2,7 @@ const {
 	getToursService,
 	getTourDetailService,
 	createTourService,
+	updateTourByIdService,
 } = require("../services/tours.services");
 
 // GET ALL TOURS
@@ -93,4 +94,29 @@ const createTour = async (req, res, next) => {
 	}
 };
 
-module.exports = { getTours, getTourDetails, createTour };
+// UPDATE A TOUR
+const updateTourById = async (req, res, next) => {
+	try {
+		const { id } = req.params;
+		const tour = await updateTourByIdService(id, req.body);
+
+		res.status(200).json({
+			status: "success",
+			message: "Updated successfully",
+			data: tour,
+		});
+	} catch (error) {
+		res.status(400).json({
+			status: "Failed",
+			message: "Data is't updated",
+			error: error.message,
+		});
+	}
+};
+
+module.exports = {
+	getTours,
+	getTourDetails,
+	createTour,
+	updateTourById,
+};

@@ -1,5 +1,6 @@
 const Tour = require("../models/index");
 
+// GET ALL TOURS
 const getToursService = async (filters, queries) => {
 	const { skip, limit = 10, fields, sortBy } = queries;
 
@@ -15,10 +16,16 @@ const getToursService = async (filters, queries) => {
 	return { totalTours, pageCount, tours };
 };
 
+// GET A SINGLE TOUR
 const getTourDetailService = async id => await Tour.find({ _id: id });
 
-const createTourService = async data => {
-	const result = await Tour.create(data);
+// CREATE A TOUR
+const createTourService = async data => await Tour.create(data);
+
+// UPDATE A TOUR BY ID
+const updateTourByIdService = async (id, data) => {
+	const tour = await Tour.findOne({ _id: id });
+	const result = await tour.set(data).save();
 	return result;
 };
 
@@ -26,4 +33,5 @@ module.exports = {
 	getToursService,
 	getTourDetailService,
 	createTourService,
+	updateTourByIdService,
 };
