@@ -1,6 +1,7 @@
 const {
 	createToolService,
 	getToolsService,
+	getToolDetailService,
 } = require("../services/tool.services");
 
 // GET ALL TOOLS
@@ -21,6 +22,27 @@ const getTools = async (req, res, next) => {
 	}
 };
 
+// GET TOOL DETAILS
+const getToolDetails = async (req, res, next) => {
+	const { id } = req.params;
+
+	try {
+		const tool = await getToolDetailService(id);
+
+		res.status(200).json({
+			status: "Success",
+			data: tool,
+		});
+	} catch (error) {
+		res.status(400).json({
+			status: "Failed",
+			message: "Can't get tool details",
+			error: error.message,
+		});
+	}
+};
+
+// CREATE A TOOL
 const createTool = async (req, res, next) => {
 	try {
 		const tool = await createToolService(req.body);
@@ -39,4 +61,4 @@ const createTool = async (req, res, next) => {
 	}
 };
 
-module.exports = { getTools, createTool };
+module.exports = { getTools, getToolDetails, createTool };

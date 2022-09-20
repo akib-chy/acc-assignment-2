@@ -5,9 +5,15 @@ const getToolsService = async () => {
 	return tools;
 };
 
+const getToolDetailService = async id => await Tool.find({ _id: id });
+
 const createToolService = async data => {
 	const result = await Tool.create(data);
 	return result;
 };
 
-module.exports = { getToolsService, createToolService };
+module.exports = {
+	getToolsService,
+	getToolDetailService,
+	createToolService,
+};
