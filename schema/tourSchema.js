@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 // tour SCHEMA DESING
 const tourSchema = mongoose.Schema(
 	{
+		viewesCount: {
+			type: Number,
+			required: [true, "Please provide a viewesCount of 0"],
+		},
 		name: {
 			type: String,
 			required: [true, "Please provide a name for this tour"],
@@ -47,12 +51,12 @@ const tourSchema = mongoose.Schema(
 );
 
 // MONGOOSE MIDDLEWARES FOR SAVEING DATA: PRE / POST
-tourSchema.pre("save", function (next) {
-	if (this.quantity === 0) {
-		this.status = "out-of-stock";
-	}
+// tourSchema.pre("save", function (next) {
+// 	if (this.viewesCount || !this.viewesCount) {
+// 		this.viewesCount = 0;
+// 	}
 
-	next();
-});
+// 	next();
+// });
 
 module.exports = tourSchema;
