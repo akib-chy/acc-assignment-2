@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const toolSchema = require("../schema/toolSchema");
+const tourSchema = require("../schema/tourSchema");
 
-// TOOL MODEL
-const Tool = mongoose.model("Tool", toolSchema);
+// TOUR MODEL
+const Tour = mongoose.model("Tour", tourSchema);
 
-module.exports = Tool;
+module.exports = Tour;

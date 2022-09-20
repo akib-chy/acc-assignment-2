@@ -1,11 +1,11 @@
 const {
-	createToolService,
-	getToolsService,
-	getToolDetailService,
-} = require("../services/tool.services");
+	getToursService,
+	getTourDetailService,
+	createTourService,
+} = require("../services/tours.services");
 
-// GET ALL TOOLS
-const getTools = async (req, res, next) => {
+// GET ALL TOURS
+const getTours = async (req, res, next) => {
 	try {
 		let filters = { ...req.query };
 		const excludeFields = ["sort", "page", "limit"];
@@ -39,52 +39,50 @@ const getTools = async (req, res, next) => {
 			queries.limit = Number(limit);
 		}
 
-		console.log("queries", queries);
-
-		const tools = await getToolsService(filters, queries);
+		const tours = await getToursService(filters, queries);
 
 		res.status(200).json({
 			status: "Success",
-			data: tools,
+			data: tours,
 		});
 	} catch (error) {
 		res.status(400).json({
 			status: "Failed",
-			message: "Can't get tools",
+			message: "Can't get tours",
 			error: error.message,
 		});
 	}
 };
 
-// GET TOOL DETAILS
-const getToolDetails = async (req, res, next) => {
+// GET TOUR DETAILS
+const getTourDetails = async (req, res, next) => {
 	const { id } = req.params;
 
 	try {
-		const tool = await getToolDetailService(id);
+		const tour = await getTourDetailService(id);
 
 		res.status(200).json({
 			status: "Success",
-			data: tool,
+			data: tour,
 		});
 	} catch (error) {
 		res.status(400).json({
 			status: "Failed",
-			message: "Can't get tool details",
+			message: "Can't get tour details",
 			error: error.message,
 		});
 	}
 };
 
-// CREATE A TOOL
-const createTool = async (req, res, next) => {
+// CREATE A TOUR
+const createTour = async (req, res, next) => {
 	try {
-		const tool = await createToolService(req.body);
+		const tour = await createTourService(req.body);
 
 		res.status(200).json({
 			status: "success",
-			message: "Tool inserted successfully",
-			data: tool,
+			message: "tour inserted successfully",
+			data: tour,
 		});
 	} catch (error) {
 		res.status(400).json({
@@ -95,4 +93,4 @@ const createTool = async (req, res, next) => {
 	}
 };
 
-module.exports = { getTools, getToolDetails, createTool };
+module.exports = { getTours, getTourDetails, createTour };
