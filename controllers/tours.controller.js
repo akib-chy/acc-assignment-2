@@ -4,6 +4,7 @@ const {
 	createTourService,
 	updateTourByIdService,
 	getTrendingTourService,
+	getCheapestTourService,
 } = require("../services/tours.services");
 
 // GET ALL TOURS
@@ -133,10 +134,29 @@ const getTrendingTour = async (req, res, next) => {
 	}
 };
 
+// GET CHEAPEST TOUR
+const getCheapestTour = async (req, res, next) => {
+	try {
+		const tours = await getCheapestTourService();
+
+		res.status(200).json({
+			status: "success",
+			data: tours,
+		});
+	} catch (error) {
+		res.status(400).json({
+			status: "Failed",
+			message: "Can't get cheapest tour",
+			error: error.message,
+		});
+	}
+};
+
 module.exports = {
 	getTours,
 	getTourDetails,
 	createTour,
 	updateTourById,
 	getTrendingTour,
+	getCheapestTour,
 };

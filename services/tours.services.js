@@ -35,10 +35,17 @@ const getTrendingTourService = async () => {
 	return tours;
 };
 
+// GET CHEAPEST TOURS
+const getCheapestTourService = async () => {
+	const tours = await Tour.find({}).sort("price").limit(3);
+	return tours;
+};
+
 module.exports = {
 	getToursService,
 	getTourDetailService,
 	createTourService,
 	updateTourByIdService,
 	getTrendingTourService,
+	getCheapestTourService,
 };
