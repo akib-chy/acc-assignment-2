@@ -3,6 +3,7 @@ const {
 	getTourDetailService,
 	createTourService,
 	updateTourByIdService,
+	getTrendingTourService,
 } = require("../services/tours.services");
 
 // GET ALL TOURS
@@ -33,7 +34,7 @@ const getTours = async (req, res, next) => {
 		}
 
 		if (req.query.page || req.query.limit) {
-			const { page = 1, limit = 10 } = req.query;
+			const { page = 1, limit = 5 } = req.query;
 
 			const skip = (page - 1) * Number(limit);
 			queries.skip = skip;
@@ -114,9 +115,28 @@ const updateTourById = async (req, res, next) => {
 	}
 };
 
+// GET TRENDING TOUR
+const getTrendingTour = async (req, res, next) => {
+	try {
+		const tours = await getTrendingTourService();
+
+		res.status(200).json({
+			status: "success",
+			data: tours,
+		});
+	} catch (error) {
+		res.status(400).json({
+			status: "Failed",
+			message: "Can't get trending tour",
+			error: error.message,
+		});
+	}
+};
+
 module.exports = {
 	getTours,
 	getTourDetails,
 	createTour,
 	updateTourById,
+	getTrendingTour,
 };

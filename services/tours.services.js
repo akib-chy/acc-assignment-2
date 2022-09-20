@@ -2,7 +2,7 @@ const Tour = require("../models/index");
 
 // GET ALL TOURS
 const getToursService = async (filters, queries) => {
-	const { skip, limit = 10, fields, sortBy } = queries;
+	const { skip, limit = 5, fields, sortBy } = queries;
 
 	const tours = await Tour.find(filters)
 		.skip(skip)
@@ -29,9 +29,16 @@ const updateTourByIdService = async (id, data) => {
 	return result;
 };
 
+// GET TRENDING TOURS
+const getTrendingTourService = async () => {
+	const tours = await Tour.find({}).sort("-viewesCount").limit(3);
+	return tours;
+};
+
 module.exports = {
 	getToursService,
 	getTourDetailService,
 	createTourService,
 	updateTourByIdService,
+	getTrendingTourService,
 };

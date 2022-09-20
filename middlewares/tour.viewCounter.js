@@ -1,5 +1,6 @@
 const Tour = require("../models");
 
+// VIEW COUNTER MIDDLEWARE
 const viewCounter = async (req, res, next) => {
 	const { id } = req.params;
 	const tour = await Tour.findById({ _id: id });
