@@ -1,11 +1,11 @@
 const express = require("express");
 const {
-	createTour,
-	getTours,
-	getTourDetails,
-	updateTourById,
-	getTrendingTour,
-	getCheapestTour,
+  createTour,
+  getTours,
+  getTourDetails,
+  updateTourById,
+  getTrendingTour,
+  getCheapestTour,
 } = require("../controllers/tours.controller");
 const viewCounter = require("../middlewares/tour.viewCounter");
 const router = express.Router();
