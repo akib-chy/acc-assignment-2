@@ -81,6 +81,7 @@ const getTourDetails = async (req, res, next) => {
 const createTour = async (req, res, next) => {
 	try {
 		const tour = await createTourService(req.body);
+		console.log(tour)
 
 		res.status(200).json({
 			status: "success",
